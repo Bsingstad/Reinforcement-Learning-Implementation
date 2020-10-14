@@ -1,8 +1,8 @@
 import numpy as np
 import pickle
 
-BOARD_ROWS = 3
-BOARD_COLS = 3
+BOARD_ROWS = 4
+BOARD_COLS = 4
 
 
 class State:
@@ -23,18 +23,18 @@ class State:
     def winner(self):
         # row
         for i in range(BOARD_ROWS):
-            if sum(self.board[i, :]) == 3:
+            if sum(self.board[i, :]) == 4:
                 self.isEnd = True
                 return 1
-            if sum(self.board[i, :]) == -3:
+            if sum(self.board[i, :]) == -4:
                 self.isEnd = True
                 return -1
         # col
         for i in range(BOARD_COLS):
-            if sum(self.board[:, i]) == 3:
+            if sum(self.board[:, i]) == 4:
                 self.isEnd = True
                 return 1
-            if sum(self.board[:, i]) == -3:
+            if sum(self.board[:, i]) == -4:
                 self.isEnd = True
                 return -1
         # diagonal
@@ -43,7 +43,7 @@ class State:
         diag_sum = max(abs(diag_sum1), abs(diag_sum2))
         if diag_sum == 3:
             self.isEnd = True
-            if diag_sum1 == 3 or diag_sum2 == 3:
+            if diag_sum1 == 4 or diag_sum2 == 4:
                 return 1
             else:
                 return -1
@@ -274,7 +274,7 @@ if __name__ == "__main__":
 
     st = State(p1, p2)
     print("training...")
-    st.play(50000)
+    st.play(10000)
 
     # play with human
     p1 = Player("computer", exp_rate=0)
